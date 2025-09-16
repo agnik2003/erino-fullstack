@@ -11,7 +11,7 @@ connectDB();
 
 const app = express();
 const allowedOrigins = [
-  "https://erino-fullstack-l6jl.vercel.app/",
+  "https://erino-fullstack-l6jl.vercel.app",
   "http://localhost:5173" // for local dev
    // your Vercel frontend URL
 ];
