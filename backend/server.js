@@ -33,8 +33,8 @@ app.options("/*splat", cors({
 }));
 
 // Routes mounted with `/api` prefix to match frontend baseURL
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/leads", require("./routes/leadRoutes"));
+app.use("/auth", require("./routes/authRoutes"));
+app.use("/leads", require("./routes/leadRoutes"));
 
 // Uncomment and update this for frontend serving in production if needed
 // if (process.env.NODE_ENV === "production") {
