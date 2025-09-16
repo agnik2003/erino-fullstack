@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend Vite URL
+    origin: process.env.FRONTEND_URL || "http://localhost:5173", // frontend Vite URL
     credentials: true,
   })
 );
@@ -24,6 +24,15 @@ app.use(
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/leads", require("./routes/leadRoutes"));  
 
+if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.join(__dirname, "../frontend/dist");
+  app.use(express.static(frontendPath));
+
+  // For React Router (SPA), always return index.html
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(frontendPath, "index.html"));
+  });
+}
 
 // Error Handler
 app.use(errorHandler);

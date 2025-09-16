@@ -14,7 +14,10 @@ export const AuthProvider = ({ children }) => {
         const { data } = await getCurrentUser();
         setUser(data);
       } catch (err) {
-        setUser(null);
+        if (err.response?.status !== 401) {
+        console.error("Error fetching current user:", err);
+      }
+      setUser(null);
       } finally {
         setLoading(false);
       }
