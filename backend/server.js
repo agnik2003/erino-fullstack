@@ -25,6 +25,12 @@ app.use(
   })
 );
 
+// Preflight requests handler
+app.options("*", cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/leads", require("./routes/leadRoutes"));
