@@ -26,7 +26,7 @@ app.use(
 );
 
 // Preflight requests handler
-app.options("*", cors({
+app.options("/*splat", cors({
   origin: allowedOrigins,
   credentials: true
 }));
