@@ -33,8 +33,8 @@ app.options("/*splat", cors({
 }));
 
 // Routes
-app.use("/auth", require("./routes/authRoutes"));
-app.use("/leads", require("./routes/leadRoutes"));
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/leads", require("./routes/leadRoutes"));
 
 // ✅ Only serve frontend when deployed in production
 // if (process.env.NODE_ENV === "production") {
