@@ -10,13 +10,17 @@ dotenv.config();
 connectDB();
 
 const app = express();
+const allowedOrigins = [
+  "http://localhost:5173", // for local dev
+  "https://erino-fullstack-tidc-1n5u7vo4r-agnik-mondals-projects.vercel.app" // your Vercel frontend URL
+];
 
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173", // frontend Vite URL
+    origin: allowedOrigins,
     credentials: true,
   })
 );
