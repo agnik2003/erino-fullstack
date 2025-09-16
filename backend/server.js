@@ -12,7 +12,7 @@ connectDB();
 const app = express();
 const allowedOrigins = [
   "http://localhost:5173", // for local dev
-  "https://erino-fullstack-tidc-1n5u7vo4r-agnik-mondals-projects.vercel.app" // your Vercel frontend URL
+  "https://erino-fullstack-tidc.vercel.app/" // your Vercel frontend URL
 ];
 
 // Middleware
