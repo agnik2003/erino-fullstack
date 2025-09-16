@@ -10,10 +10,10 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
 const allowedOrigins = [
   "https://erino-fullstack-l6jl.vercel.app",
   "http://localhost:5173" // for local dev
-   // your Vercel frontend URL
 ];
 
 // Middleware
@@ -32,16 +32,14 @@ app.options("/*splat", cors({
   credentials: true
 }));
 
-// Routes
+// Routes mounted with `/api` prefix to match frontend baseURL
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/leads", require("./routes/leadRoutes"));
 
-// ✅ Only serve frontend when deployed in production
+// Uncomment and update this for frontend serving in production if needed
 // if (process.env.NODE_ENV === "production") {
 //   const frontendPath = path.join(__dirname, "../frontend/dist");
 //   app.use(express.static(frontendPath));
-
-//   // ✅ Fix for Express v5+: use "/*" instead of "*"
 //   app.get("/*splat", (req, res) => {
 //     res.sendFile(path.resolve(frontendPath, "index.html"));
 //   });
