@@ -23,20 +23,23 @@ app.use(
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/leads", require("./routes/leadRoutes"));  
+app.use("/api/leads", require("./routes/leadRoutes"));
 
+// ✅ Only serve frontend when deployed in production
 if (process.env.NODE_ENV === "production") {
   const frontendPath = path.join(__dirname, "../frontend/dist");
   app.use(express.static(frontendPath));
 
-  // For React Router (SPA), always return index.html
-  app.get("*", (req, res) => {
+  // ✅ Fix for Express v5+: use "/*" instead of "*"
+  app.get("/*", (req, res) => {
     res.sendFile(path.resolve(frontendPath, "index.html"));
   });
 }
 
-// Error Handler
+// Error Handler (must be last middleware)
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`✅ Server running on port ${PORT} in ${process.env.NODE_ENV} mode`)
+);
